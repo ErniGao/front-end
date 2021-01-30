@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script type = "text/javascript">
+			/*
+			字符串 String
+			*/
+		   var str = "hello";
+		   var str1 = "你说：\"今天天气好！\"";
+		   var str2 = "你说：'今天天气好！'";
+		   console.log(str);
+		   console.log(str1);
+		   console.log(typeof str);
+		   
+		   /*
+		   数字 Number
+		   */
+		   var a =123;
+
+		   console.log(typeof a);
+		   //js中可以表示数字的最大值
+		   console.log(Number.MAX_VALUE);
+		   
+		   a = Infinity;  //正无穷
+		   console.log(typeof a);
+		   b = - Infinity;
+		   
+		   c = "abc" * "bcd";
+		   console.log(c);  //NaN，表示不是一个数字
+		   d =NaN;
+		   console.log(typeof d); //类型也是number
+		   
+		   e = Number.MIN_VALUE;
+		   console.log(e);  //5e-324,零以上的最小值
+		   
+		   /*
+		   布尔值
+		   */
+		   var bool = true;
+		   console.log(bool);
+		   console.log(typeof bool);
+		   
+		   /*
+		   Null类型
+		   */
+		  var f=null;
+		  console.log(typeof f);  //类型为object
+		  
+		  /*
+		  Undefined类型
+		  */
+		   var g;
+		   console.log(g); //值为undefined （声明来但是没赋值）
+		   console.log(typeof g); //也是Undefined
+		</script>
+	</head>
+	<body>
+	</body>
+</html>
