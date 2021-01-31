@@ -5,7 +5,7 @@
 		<title></title>
 		<script type = "text/javascript">
 			/*
-			字符串 String
+			1.字符串 String
 			*/
 		   var str = "hello";
 		   var str1 = "你说：\"今天天气好！\"";
@@ -15,7 +15,7 @@
 		   console.log(typeof str);
 		   
 		   /*
-		   数字 Number
+		   2.数字 Number
 		   */
 		   var a =123;
 
@@ -36,24 +36,188 @@
 		   console.log(e);  //5e-324,零以上的最小值
 		   
 		   /*
-		   布尔值
+		   3.布尔值
 		   */
 		   var bool = true;
 		   console.log(bool);
 		   console.log(typeof bool);
 		   
 		   /*
-		   Null类型
+		   4.Null类型
 		   */
 		  var f=null;
 		  console.log(typeof f);  //类型为object
 		  
 		  /*
-		  Undefined类型
+		  5.Undefined类型
 		  */
 		   var g;
 		   console.log(g); //值为undefined （声明来但是没赋值）
 		   console.log(typeof g); //也是Undefined
+		   
+		   /*
+		   强制类型转换：
+		   */
+		  
+		  /* 将其他数据类型转换为String
+		  1. 调用被转换数据类型的toString方法
+			- 该方法不会影响原变量，会将转换之后的结果返回
+			- null和undefined没有toString方法，调用会报错
+		  2. 调用String()函数，并将被转换的数据作为参数传递给函数
+		  */
+		  var a1 = 123;
+		  console.log(typeof a1);
+		  console.log(a1);
+		  //方式1:toString()
+		  a2 = a1.toString();
+		  console.log(typeof a2);
+		  console.log(a2);
+		  
+		  //报错
+		  //a3 = null;
+		  //a3 = a3.toString();
+		  //console.log(a3)
+		  
+		  //方式2:String()函数
+		 var a4 = 123;
+		 a4 = String(a4);
+		 console.log(a4);
+		 console.log(typeof a4);
+		 
+		 a4 = null;
+		 a4 = String(a4);
+		 console.log(a4);
+		 console.log(typeof a4);
+		  
+		 /*
+		 将其他数据类型转换为Number
+		 1. 使用Number()函数
+		 2. 使用parseInt() 和parseFloat()
+		 */
+		var b1 = "123";
+		b1 = Number(b1);
+		console.log(b1);
+		console.log(typeof b1);
+		var b2 = "abc";
+		b2 = Number(b2);
+		console.log(b2);  //NaN
+		console.log(typeof b2);
+		var b3 = "";
+		b3 = Number(b3);
+		console.log(b3);  //0
+		console.log(typeof b3);
+		var b4 = " ";
+		b4 = Number(b4);
+		console.log(b4);  //0
+		console.log(typeof b4);
+		
+		var b5 = true;
+		b5 = Number(b5);
+		console.log(b5);  //0
+		console.log(typeof b5);
+		
+		var b6 = False;
+		b6 = Number(b6);
+		console.log(b6);  //0
+		console.log(typeof b6);
+		
+		var b7 = null;
+		b7 = Number(b7);
+		console.log(b7);  //0
+		console.log(typeof b7);
+		
+		var b8= undefined;
+		b8 = Number(b8);
+		console.log(b8);  //NaN
+		console.log(typeof b8);
+		
+		// 2. parseInt(),parseFloat()
+		var c1 = "123px";
+		c1 = parseInt(c1);
+		console.log(c1);
+		console.log(typeof c1);
+		
+		var c2 = "123.456px";
+		c2 = parseFloat(c2);
+		console.log(c2);
+		console.log(typeof c2);
+		
+		var c3 = "px123";
+		c3 = parseInt(c3);
+		console.log(c3);
+		console.log(typeof c3);
+		
+		/*
+		进制转换
+		*/
+	    var d1 = 0x10;
+		var d2 = 0xff;
+		
+		console.log(d1);  //将16进制数字显示成10进制
+		console.log(d2);
+		
+		var d3 = 070;
+		console.log(d3);
+		
+		var d4 = 0b10;
+		console.log(d4);
+		
+		//"070"这种字符串，有些浏览器当作八进制解析，有些当作十进制解析
+		var d5 = "070";
+		d5 = parseInt(d5);
+		//因此要在parseInt中传递第二个参数，来指定数字的进制
+		d5 = parseInt(d5,10)
+		console.log(typeof d5);
+		console.log(d5);
+		
+		/*
+		将其他数据类型转为Boolean
+		1. 调用Boolean()函数
+		*/
+	   var e1 = 123; //true
+	   e1 = Boolean(e1);
+	   console.log(typeof e1);
+	   console.log(e1);
+	   
+	   var e2 = 0;  //false
+	   e2 = Boolean(e2);
+	   console.log(typeof e2);
+	   console.log(e2);
+	   
+	   var e3 = Infinity; //true
+	   e3 = Boolean(e3);
+	   console.log(typeof e3);
+	   console.log(e3);
+	   
+	   var e4 = NaN;  //false
+	   e4 = Boolean(e4);
+	   console.log(typeof e4);
+	   console.log(e4);
+	   
+	   var e5 = :"hello";  //true
+	   e5 = Boolean(e5);
+	   console.log(typeof e5);
+	   console.log(e5);
+	   
+	   var e6 ="";  //false
+	   e6 = Boolean(e6);
+	   console.log(typeof e6);
+	   console.log(e6);
+	   
+	   var e7 = null;  //false
+	   e7 = Boolean(e7);
+	   console.log(typeof e7);
+	   console.log(e7);
+	   
+	   var e8 = undefined;  //false
+	   e8 = Boolean(e8);
+	   console.log(typeof e8);
+	   console.log(e8);
+	   
+		
+		
+
+		  
 		</script>
 	</head>
 	<body>
