@@ -37,7 +37,7 @@
 		   result = 2 + NaN; //NaN
 		   console.log(result);
 		   
-		   result = "123" + "456";  //123456""
+		   result = "123" + "456";  //"123456"
 		   console.log(result);
 		   console.log(typeof result);
 		   
@@ -48,6 +48,82 @@
 		   result = true +"hello"; //"truehello"
 		   console.log(result); 
 		   
+		   //可以利用字符串加法的特点来进行字符串的类型转换，使用+""即可将任意类型转为String
+		   //这是一种隐式的类型转换，由浏览器自动完成，实际上它也是调用的String函数
+		   var a1 = 123;
+		   a1 = a1 + "";
+		   console.log(result);
+		   console.log(typeof a1);
+		   
+		   
+		   var a2 = 123;
+		   console.log("a2= "+a2);
+		   
+		   result = 1+2+"3";
+		   console.log("result = " +result); //33  
+		   //运算是从左往右算的，先计算1+2为3，再用数字和字符串做拼接
+		   
+		   /*
+		   -
+		   */
+		  
+			var b1 = 100-5;
+			console.log(b1);
+			var b2 = 100 - true;  //true =1
+			console.log(b2); //99
+			var b3= 100-"1";   //将字符串1转换成Number的1
+			console.log(b3); //99
+			
+			/*
+			乘法
+			*/
+		   var c1 = 2*2;
+		   console.log(c1); //4
+		   var c2 = 2 * "8";
+		   console.log(c2);
+		   var c3 = 2 * undefined;  //undefined 转换为Number就是NaN
+		   console.log(c3); //NaN
+		   
+		   /*
+		   /
+		   */
+			var d1 = 4/2;
+			console.log(d1); 2
+			var d2 = 3/2;
+			console.log(d2); //1.5
+			
+			//任何值做- * /运算时都会自动转为Number
+			//可以用这个特性做隐式类型转换,原理和Numbe()一样
+			var e1 = "123";
+			e1 = e1 -0;
+			console.log(e1);
+			
+			/*
+			% 取余数
+			*/
+			 var f1 = 9%3;
+			 console.log(f1);  //0
+			 var f2 = 9%4;
+			 console.log(f2);  //1
+		   
+		   /*
+		   一元运算符：正号和负号
+		   */
+		  var g1 = 123;
+		  g1 = -g1;
+		  console.log(g1);
+		  
+		  var g2 = true;
+		  g2 = -g2;
+		  console.log(g2);  //-1
+		  
+		  var g3 = "18";
+		  g3 = +g3;
+		  console.log(g3); //18
+		  console.log(typeof g3); //number
+		   
+		   var g4 = 1 + +"2" +3;
+		   console.log(g4); //6
 		</script>
 	</head>
 	<body>
