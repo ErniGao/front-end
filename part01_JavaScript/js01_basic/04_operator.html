@@ -124,6 +124,127 @@
 		   
 		   var g4 = 1 + +"2" +3;
 		   console.log(g4); //6
+		   
+		   /*
+		   自增
+		   */
+		  var h1 =1;
+		  h1++;
+		  //++h1; //h1的值两者是相同的
+		  console.log(h1);
+		  
+		  var h2 = 1;
+		  console.log("++h2 = " + ++h2); //2
+		  
+		  var h3 = 1;
+		  console.log("h3 = " + h3++);  //1
+		  
+		  var h4 = 20;
+		  h4 = h4++;
+		  console.log("h4 = " + h4);   //20
+		  //实际上给h4赋了两次值，首先将h4变成了h4++，这时h4等于21
+		  // 然后将h4++（这个值为20）又重新赋给了h4
+		  
+		  /*
+		  自减：方式同自增一样
+		  */
+		 
+		 var i1 = 10;
+		 //i1--;
+		 --i1;
+		 console.log("i1 = " + i1);
+		  
+		/*
+		逻辑运算符
+		*/
+	   
+	   //非运算：取反操作
+		var j1 = true;
+		console.log("j1 = " +j1);
+		j1 = !j1;
+		console.log("j1 = " +j1);
+		
+		//先转换为布尔值再取反
+		var j2 =10;
+		console.log("j2 = " + j2);
+		console.log(typeof j2);
+		j2 = !j2;
+		console.log("j2 = " + j2);
+		console.log(typeof j2);
+		
+		//与运算：JS中的与是短路的与
+		var j3 = true && true;
+		console.log(j3)
+		var j4 = true && false;
+		console.log(j4);
+		var j5 = false && true;
+		console.log(j5);
+		var j6 = false && false;
+		console.log(j6);
+		
+		//短路
+		//第一个值为true会检查第二个值
+		true && alert("你看我出不出来");
+		//第一个值为false，不会检查第二个值
+		false && alert("你看我出不出来");
+		
+		//非布尔型的与运算
+		var result = 5 && 6;
+		console.log(result);  //6
+		
+		//或运算，或也是短路的或
+		var j7 = false || false;
+		console.log(j7);
+		var j8 = true || false;
+		console.log(j8);
+		var j9 = false || true;
+		console.log(j9);
+		var j10 = true || true;
+		console.log(j10);
+		
+		//短路的或
+		//第一个值为false会检查第二个值
+		false || alert("123");
+		//第一个值为true则不会检查第二个值
+		true || alert("123");
+		
+		var result = 1 || 2;
+		console.log(result); //1
+		
+		var result = 2 || 1;
+		console.log(result); //2
+		
+		var result = 2 || NaN;
+		console.log(result); //2
+		
+		var result = NaN || 2;
+		console.log(result); //2
+		
+		/*
+		赋值运算
+		*/
+	    var k1 = 10;
+		k1 += 5;  //等同于 k1 = k1 +5
+		console.log("k1 = " + k1); //15
+	   
+	    /*
+		关系运算
+		*/
+	   var l1 = 5 > 10;
+	   console.log("l1 = " + l1);
+	   var l2 = 5 > 4;
+	   console.log("l2 = " + l2);
+	   //非数值的关系运算
+	   console.log(1 > true); //false
+	   console.log(1 >= true); //true
+	   console.log(1 > "0") //true （将字符串0转换为数字0，再进行比较）
+	   console.log(10 > null); //true
+	   console.log(10 < "hello"); //false  任何值和NaN做任何比较都是false
+		
+	  // 两侧都是字符串的时候，比较的是unicode编码
+	  console.log("a" > "b");  //false
+	  // 比较字符编码时是一位一位进行比较，先是用左侧的a和右侧b比较，a小后面就不比了
+	  console.log("abc" < "b"); //true
 		</script>
 	</head>
 	<body>
