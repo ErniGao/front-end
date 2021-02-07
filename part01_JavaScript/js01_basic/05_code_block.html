@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript">
+        /*
+        if 语句
+         */
+        var a1 = 11;
+        if (a1>10)
+            alert("a1 比10大");
+            alert("谁也管不了我"); //无论条件为true还是false，这一行都会执行
+        
+        var a2 = 11;
+        if (a2 >10)
+        {//这两行代码都能在if条件成立的时候执行了
+            alert("a1 比10大");
+            alert("谁也管不了我"); 
+        } 
+        
+        var age = 50;
+        if(age>60){
+            alert("你已经退休了");
+        }else{
+            alert("你还没退休");
+        }
+        
+        if(age >100){
+            alert("age > 100");
+        }else if (age > 80){
+            alert("age > 80");
+        }else if (age> 60){
+            alert("age > 60");
+        }else if (age > 30){
+            alert("age > 30");
+        }else{
+            alert("age <30");
+        }
+        
+        /*
+        条件分支语句
+         */
+        var b1 = 3;
+        switch(b1){
+            case 1:
+                console.log("壹");
+                break;
+            case 2:
+                console.log("贰");
+                break;
+            case 3:
+                console.log("叁");
+                break;
+            default:
+                console.log("非法数字");
+                break;
+        }
+        
+        //用switch做区间判断
+        var b2 = 62;
+        switch (true){
+            case b2 >= 60:
+                console.log("合格");
+                break;
+            default:
+                console.log("不合格");
+                break;
+        }
+        
+        /*
+        循环语句
+         */
+        //while循环
+        var c1 = 0;
+        while(c1<10){
+            document.write(c1++ + "<br />"); //<br />是浏览器中的换行标签
+        }
+        
+        //do...while
+        var c2 = 11;
+        do{
+           document.write(c1++ + "<br />"); 
+        }while(c2<=10);
+        
+        //for循环
+        for (var i=0;i<10;i++){
+            alert(i);
+        }
+        
+        //for循环的三个部分都可以省略，也可以写在外面
+        var c3 =0;
+        for(;c3<10;){
+            alert(c3++);
+        }
+        
+        //for循环可以初始化多个变量
+        for(var i=1,sum=0;i<=100;i++){
+            if(i%2 != 0){
+                sum += i;
+            }
+        }
+        console.log("1-100间奇数和为 " + sum);
+        
+        //循环嵌套
+        for(var i=0; i<5; i++){
+            for (var j=0; j<i+1; j++){
+                document.write("*&nbsp;&nbsp")
+            }
+            document.write("<br />")
+        }
+        
+        //break: 可以终止当前的循环
+        //break创建一个label，来标识指定的循环
+        outer:
+        for (var i=0; i<5; i++){
+	        console.log("外层循环" + i);
+	        for (var j=0; j<5; j++){
+		        break outer;
+		        console.log("内层循环 " + j);
+	        }
+        }
+        
+        //continue:可以用来跳过当前循环，语法同break一样
+        
+    </script>
+</head>
+<body>
+
+</body>
+</html>

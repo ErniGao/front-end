@@ -245,6 +245,52 @@
 	  console.log("a" > "b");  //false
 	  // 比较字符编码时是一位一位进行比较，先是用左侧的a和右侧b比较，a小后面就不比了
 	  console.log("abc" < "b"); //true
+	
+	  /*
+	  相等运算符： 使用 == 来做相等运算
+	   */
+	  console.log(1 == 1); //true
+	  var m1 = 10;
+	  console.log(m1 == 4); //false
+	  console.log("1" == 1); //true:做了自动类型转换 （将字符串1转换成数字1）
+	  console.log(true=="1"); //true: 将字符串和布尔值都转换为number
+	  console.log(null==0);// false: 这里null并没有转成number
+	  console.log(undefined == null); //true: undefined 衍生自null，所以做相等判断是为true
+	  console.log(NaN==NaN); //false: NaN 不和任何值相等
+	  //可以通过isNaN函数来判断一个值是否是NaN
+	  var m2 = NaN;
+	  console.log(isNaN(m2)); //true
+	  /*
+	  不相等：!= 		
+	   */
+	  console.log(10 != 5); //true
+	  console.log("1" != 1); //false: 不相等也会对变量进行自动的类型转换，如果转换后相等也会返回false
+			
+	  //全等 ===： 如果类型不同直接返回false，不会做自动类型转换
+	  console.log("123" ===123); //false
+	  console.log("123" == 123); //true
+	  
+	  //不全等： !== 类型不同直接返回true
+	  console.log(1 != "1"); //true
+			
+	  /*
+	  条件运算符 （三元运算符）		
+	   */
+	  true?alert("语句1"):alert("语句2"); //true 和false写死了，通常不会这么用
+	  var n1 = 10;
+	  var n2 = 20;
+	  var n3 = 30;
+	  n1>n2 ? alert("n1大"):alert("n2大");
+	  //这个三元表达式可以获取最大值,使用变量获取执行结果
+	  var max = n1>n2 ? n1 : n2;
+	  console.log("max = " + max);
+	  //连用两次三元表达式获取三个数中的最大值
+	  max = max>n3? max: n3;
+	  console.log(max);
+	  // 可以将两组三元表达式连写，但是这种写法不推荐，不方便阅读，且性能也不会高
+	  max = n1 > n2 ? (n1 > n3 ? n1: n3) : (n2>n3? n2:n3); 		
+	  console.log(max);
+	 
 		</script>
 	</head>
 	<body>

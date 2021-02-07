@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type = "text/javascript">
+        /*
+        创建对象：
+        使用new关键字调用的函数是构造函数
+         */
+        var obj = new Object();
+        
+        /*
+        向对象中添加属性
+         */
+        obj.name = "孙悟空";
+        obj.gender = "男";
+        obj.age = 18;
+        
+        //读取属性
+        console.log(obj.name);
+        
+        //修改对象属性，和保存属性语法一样，只是将之前值覆盖
+        obj.name = "Tom";
+        
+        //删除对象属性
+        delete obj.name;
+        console.log(obj.name); //undefined,name属性已经被删除了
+        //不存在的属性就是undefined，不会报错
+        
+        //属性名理论上不需要遵守标识符的命名规则，但是要使用特殊名称，需要用[]来存和取
+        obj["123"] = 789;
+        //取属性也要用[]来取
+        console.log(obj["123"]);
+        //[]中可以传递变量
+        obj["nihao"] = "你好";
+        var n = "123";
+        console.log(obj[n]);  //用的时候会转换成字面量，可以返回789
+        //传n并不是去obj中找n这个属性，而是n这个变量对应的字面量的那个属性
+        var m = "nihao";
+        console.log(obj[m]); //你好
+        
+        /*
+        JS对象的属性值可以是任意数据类型
+         */
+        obj.test = true;
+        console.log(obj.test);
+        var obj2 = new Object();
+        obj.name = "猪八戒";
+        obj.test = obj2;
+        console.log(obj);
+        console.log(obj.test); //打印出来的是一个对象
+        console.log(obj.test.name); //结果是猪八戒
+        
+        //检查obj中是否有test2属性
+        console.log("test2" in obj);  //false
+        console.log("test" in obj); //true
+    </script>
+</head>
+<body>
+
+</body>
+</html>
