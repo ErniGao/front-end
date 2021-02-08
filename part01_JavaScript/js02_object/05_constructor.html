@@ -70,7 +70,7 @@
             this.age = age;
             this.gender = gender;
             this.sayName = function(){
-                alert(this);
+                alert(this.name);
             };
         }
         
@@ -83,6 +83,35 @@
         使用instanceof 可以检查一个对象是否是一个类的实例
          */
         console.log(per instanceof Person);
+
+        console.log(per instanceof Object); //true
+
+        /*
+        目前我们的方法在构造函数内部创建的，也就是构造函数每执行一次就会创建一个新的SayName方法
+        也就是所有实例的SayName都是唯一的 （每个对象都有自己的SayName方法）
+        构造函数执行一次就会创建一个新的方法，而这些方法都是一样的，这是没有必要的，可以使所有的对象共享同一个方法
+        解决方法： 将sayName定义到全局作用域中
+         */
+        console.log(per.sayName == per1.sayName); //false,它们是两个对象
+        function func(){
+            alert(this.name);
+        }
+        function Person(name,age,gender){
+            this.name = name;
+            this.age = age;
+            this.gender = gender;
+            this.sayName = func;
+        }
+
+        var per2 = new Person("孙悟空",18,"男");
+        var per3 = new Person("猪八戒",18,"男");
+        console.log(per2.sayName == per3.sayName); //true
+
+        /*
+        原型 prototype
+        我们所创建的每个函数，解析器都会想函数中添加一个属性prototype
+         */
+
     </script>
 </head>
 <body>

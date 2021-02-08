@@ -8,6 +8,7 @@
 
   - 以函数的形式调用时，this永远都是window
   - 以方法的形式调用时，this就是调用方法的对象
+  - 以构造函数的形式调用时，this就是新创建的那个对象
 
 - this可以根据调用者的不同输出不同的值
 
@@ -87,7 +88,7 @@
   console.log(per1);  //object
   ```
 
-- 构造函数的执行流程
+- 构造函数的执行流程 （只有第三步的代码是我们写的，剩下的全部是浏览器做的）
 
   1. 立刻创建一个新的对象 （堆内存中开辟新空间创建对象）
   2. 将新建的对象设置为函数中的this （当函数以构造函数形式调用时，this就是新创建的对象）。因此，在构造函数中可以使用this来引用新创建的对象
@@ -100,8 +101,32 @@
 
   - 语法： 对象 instanceof 构造函数
 
+  - 所有的对象都是Object的后代，所以任何对象和Object做instanceof检查时都会返回true
+
     ```
     console.log(per instanceof Person);
     ```
 
-- 
+
+- 我们将方法写在构造函数内部，构造函数每执行一次就会创建一个新的方法，而这些方法都是一样的，这是没有必要的，我们可以使所有对象共享同一个方法。解决方法：将方法定义到全局作用域中
+
+  ```javascript
+  function func(){
+    alert(this.name);
+  }
+  function Person(name,age,gender){
+  	this.name = name;
+    this.age = age;
+    this.gender = gender;
+    this.sayName = func;
+  }
+  var per2 = new Person("孙悟空",18,"男");
+  var per3 = new Person("猪八戒",18,"男");
+  console.log(per2.sayName == per3.sayName); //true
+  ```
+
+## 原型对象
+
+- 将函数定义在全局作用域，污染了全局作用域的命名空间，而且定义在全局作用域中也很不安全 （可能会有函数名相同被覆盖）。为了解决这个问题，我们可以使用原型
+- 我们所创建的每个函数，解析器都会向函数中添加一个属性prototype。这个属性对应着一个对象，这个对象就是我们所谓的原型对象。如果函数作为普通函数调用，prototype没有任何作用；如果函数以构造函数形式调用时，它所创建的对象中都会有一个隐含的属性，窒息那个该构造函数的原型对象
+
