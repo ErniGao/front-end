@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type = "text/javascript">
+        var obj = new Object();
+        obj.name ="孙悟空";
+        obj.age = 18;
+        /*
+        函数也可以作为属性值，
+        这时这个函数称为对象的方法
+         */
+        obj.sayName = function(){
+            console.log(obj.name);
+        };
+        console.log(obj.sayName);
+        obj.sayName();   //调用sayName这个函数，就是调用obj的sayName方法
+    </script>
+</head>
+<body>
+
+</body>
+</html>

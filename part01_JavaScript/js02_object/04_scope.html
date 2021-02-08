@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type = "text/javascript">
+        /*
+        作用域
+        1. 全局作用域：
+            script标签中的JS代码都在全局作用域中
+            全局作用域在页面打开时创建，在页面关闭时销毁
+            全局作用域中有一个全局对象window，我们可以直接使用
+            在全局作用域中，创建的变量都会作为window对象的属性保存，
+            创建的函数都会作为window对象的方法保存
+        2. 函数作用域
+             调用函数时，创建函数作用域，函数执行完毕以后，函数作用域销毁
+             每调用一次函数，就会创建一次新的函数作用域，它们之间是互相独立的
+         */
+        
+        //我们所谓的函数都是window对象的方法
+        var a1 = 20;
+        console.log(window.a1);
+        
+        function func(){
+            console.log("我是func函数");
+        }
+        window.func();
+        
+        //声明提前
+        console.log("a = " +a2);  
+        //用var关键字声明的变量，会在代码执行前全部声明，但是不会赋值
+        //这里a的值是undefined，不会报错
+        var a2 = 10;
+        
+        //函数声明会被提前创建
+        func1();  //不会报错，会正常执行
+        function func1(){
+            console.log("我是func1函数")
+        }
+        
+        // 函数表达式不会被提前创建
+        func2();  // 会报错： undefined is not a function
+        var func2 = function(){
+            console.log("我是func2函数");
+        }
+        
+        //函数作用域
+        var b1 = 10;
+        function func3(){
+            var b1 = "我是func3函数中的变量b1";
+            var b2 = 20;
+            function func4(){
+                console.log("b1 = " +b1);
+                console.log(window.b1); //函数中使用window访问全局作用域
+            }
+        }
+        //函数变量先在自己的作用域中找，自己没有会往上一级找，直到找到全局作用域
+        //如果全局作用域中依然没有找到，则会报错 referenceError
+        func3();   
+        // 第一个是：b1 = 我是func3函数中的变量b1
+        //第二个是：10
+        
+        //函数作用域中的声明提前
+        var c1 = 100;
+        function func4(){
+            console.log("c2 = "+ c2);  //函数作用域中有c2，c2的声明提前，这里是undefined
+            var c2 =110;
+            console.log("c1 = "+c1); //函数作用域中没有c1,会去找全局变量
+        }
+        func4();
+        
+        //不使用var关键字的都是全局变量
+        var d = 33;
+        function func5(){
+            console.log("d = " + d);
+            d = 10;
+        }
+        func5();  //输出为33
+        console.log("d = " + d); //为10 （在函数内部声明了一个全局变量，且这个变量d离输出语句最近
+    </script>
+</head>
+<body>
+
+</body>
+</html>

@@ -17,6 +17,14 @@
         obj.gender = "男";
         obj.age = 18;
         
+        //通过for...in语句可以获取属性
+        for (var n in obj){
+            //获取属性名
+            console.log("属性名" + n);
+            //n是变量，用[]方式可以用变量来取属性值
+            console.log(obj[n]);
+        }
+        
         //读取属性
         console.log(obj.name);
         
@@ -55,6 +63,54 @@
         //检查obj中是否有test2属性
         console.log("test2" in obj);  //false
         console.log("test" in obj); //true
+        
+        /*
+        基本数据类型和引用数据类型
+         */
+        var num1 = 123;
+        var num2 = num1;
+        num1++;
+        console.log(num1);   //124
+        console.log(num2);   //123
+        
+        var obj_1 = new Object();
+        obj_1.name = "孙悟空";
+        var obj_2 = obj_1;
+        //修改obj_1的属性
+        obj_1.name = "猪八戒";
+        console.log(obj_1.name);   //猪八戒
+        console.log(obj_2.name);   //猪八戒，修改一个变量影响另一个变量的值
+        
+        obj_1 = null;
+        console.log(obj_1);  //null
+        console.log(obj_2);   //仍旧是object
+        
+        var num3 = 10;
+        var num4 = 10;
+        console.log(num3 == num4); //true
+        
+        var obj_3 = new Object();
+        var obj_4 = new Object();
+        
+        obj_3.name = "沙和尚";
+        obj_4.name = "沙和尚";
+        console.log(obj_3);
+        console.log(obj_4);
+        console.log(obj_3 == obj_4); //false，这是两个对象，只是属性值一样
+        
+        /*
+        使用对象字面量来创建对象
+         */
+        var obj_5 = {};
+        console.log(typeof obj_5); //object
+        obj_5.name = "孙悟空";
+        console.log(obj_5.name); //孙悟空
+        
+        var obj_6 = {name:"猪八戒", age:28, gender:"男",test:{name:"沙和尚"}};
+        console.log(obj_6.name);
+        console.log(obj_6.age);
+        console.log(obj_6.gender);
+        cosole.log(obj_6.test); //这个是个object
     </script>
 </head>
 <body>

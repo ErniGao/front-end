@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type = "text/javascript">
+        /*
+        浏览器（解析器）在调用函数时，每次都会向函数内部传递进一个隐含的参数，
+        这个隐含的参数就是this （上下文对象）
+        根据函数的调用方式不同，this会指向不同的对象
+         */
+        function func1(){
+            console.log(this);
+        }
+        func1();  //this这里指的window对象
+        
+        var obj1  = {
+            name:"孙悟空",
+            sayName:func1
+        };
+        
+        console.log(obj1.sayName==func1); //true
+        obj1.sayName(); // this指向的是obj1
+        //使用sayName和func1调用的是同一个函数，但是this的指向是不同的
+        
+        function func2(){
+            console.log(this.name);
+        }
+        var obj2 ={
+            name:"沙和尚",
+            sayName:func2
+        };
+        var obj3 = {
+            name:"孙悟空",
+            sayName:func2
+        }
+        //this指代的是不同的对象
+        obj2.sayName();   //沙和尚
+        obj3.sayName();   //孙悟空
+        
+        /*
+        创建对象：使用工厂创建对象
+         */
+        function createPerson(name,age,gender){
+            //创建一个新的对象,这个obj是局部的
+            var obj = new Object();
+            //向对象中添加属性
+            obj.name = name;
+            obj.age = age;
+            obj.gender = gender;
+            obj.sayName = function(){
+                alert(this.name);
+            };
+            //将新的对象返回
+            return obj;
+        }
+        
+        var obj4 = createPerson("猪八戒",28,"男");
+        var obj5 = createPerson("白骨精",18, "女");
+        var obj6 = createPerson("蜘蛛精",16,"女");
+        console.log(obj4.name);
+        console.log(obj5.name);
+        console.log(obj6.name);
+        
+        /*
+        构造函数
+         */
+        function Person(name,age,gender){
+            this.name = name;
+            this.age = age;
+            this.gender = gender;
+            this.sayName = function(){
+                alert(this);
+            };
+        }
+        
+        var per = new Person("孙悟空",18,"男");
+        var per1 = new Person("猪八戒",18,"男");
+        console.log(per);
+        console.log(per1);
+        
+        /*
+        使用instanceof 可以检查一个对象是否是一个类的实例
+         */
+        console.log(per instanceof Person);
+    </script>
+</head>
+<body>
+
+</body>
+</html>
