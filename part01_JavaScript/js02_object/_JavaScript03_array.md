@@ -158,7 +158,76 @@
     console.log("result7 = " + result7);
     ```
 
-- 
+- concat():可以连接两个或多个数组，并将新的数组返回，该方法可以传多个数组或元
+
+  ```javascript
+  var arr16 = ["孙悟空","猪八戒","沙和尚"];
+  var arr17 = ["白骨精","玉兔精","蜘蛛精"];
+  var arr18 = ["二郎神","太上老君","玉皇大帝"];
+  arr16.concat(arr17);
+  //该方法不会对原数组产生影响
+  console.log(arr16);
+  console.log(arr17);
+  var res = arr16.concat(arr17);
+  console.log(res); //新数组
+  //该方法可以传多个数组或元素
+  var res1 = arr16.concat(arr17,arr18,"牛魔王","铁扇公主");
+  console.log(res1);
+  ```
+
+- join(): 将数组的所有元素放到字符串中（将数组转换成字符串）
+
+  ```javascript
+  var arr16 = ["孙悟空","猪八戒","沙和尚"];
+  var res2 = arr16.join();
+  console.log(res2); //将所有元素转换为字符串，并用逗号连接
+  console.log(typeof res2); //string
+  //可以指定一个字符串作为参数，该参数为元素对连接符
+  //如果不指定则默认使用逗号作为连接符
+  var res3 = arr16.join("hello");
+  console.log(res3);
+  var res4 = arr16.join("-");
+  console.log(res4);
+  //如果不需要连接符默认使用空串
+  var res5 = arr16.join("");
+  console.log(res5);
+  ```
+
+- reverse():颠倒数组中元素的顺序，会影响原数组
+
+  ```javascript
+  var arr16 = ["孙悟空","猪八戒","沙和尚"];
+  //reverse会直接修改原数组
+  arr16.reverse();
+  console.log(arr16);
+  ```
+
+- sort(): 对数组的元素进行排序，默认按照unicode的顺序排序，会影响原数组
+
+  ```javascript
+  var arr19 = ["b","d","e","a","c"];
+  arr19.sort();
+  console.log(arr19);
+  //即使对于纯数字的数字，使用sort也会按照unicode编码排序
+  //所以对数字进行排序时会得到错误的结果
+  var arr20 = [3,1,2,11,4,5];
+  arr20.sort();
+  console.log(arr20);
+  
+  //我们可以自己来指定排序规则
+  //我们可以在sort中添加一个回调函数，来指定排序规则
+  //回调函数中需要定义两个形参，浏览器将会分别使用数组中的元素作为实参去调用回调函数
+  //使用那个元素调用不确定，但是肯定的时数组中a一定在b的前边
+  //浏览器会根据回调函数的返回值来决定元素的顺序，如果返回一个大于0的值，则元素会交换位置，如果返回小于0的值则元素位置不变
+  //如果返回等于0的值，则认为两个元素相等，相等也不交换位置
+  var arr21 = [3,1,2,11,4,5];
+  arr21.sort(function(a,b){
+  	return a-b;  //升序排列
+  });
+  arr21.sort(function(a,b){
+    return b-a;  //降序排列
+  })
+  ```
 
 ## 数组遍历
 

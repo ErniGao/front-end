@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript">
+        function func(){
+            alert("我是func函数");
+        }
+        func.apply();
+        func.call();
+        func();
+
+        //call和apply能修改上下文对象
+        function func1(){
+            alert(this.name);
+        }
+
+        var obj = {
+            name:"obj",
+            sayName:function(){
+                alert(this.name);
+            }
+        };
+        var obj2 = {name:"obj2"};
+        func1.apply(obj);
+        func1.apply(obj2);
+
+        obj.sayName();  //会弹出obj
+        //参数是谁，调用的这个函数的this就是谁，无论是那个对象调用的
+        obj.sayName.apply(obj2);  //会弹出obj2
+
+
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>
