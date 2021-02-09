@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript">
+        //创建数组对象
+        var arr = new Array();
+        console.log(typeof arr);  //object类型
+        //向数组中添加元素
+        arr[0] = 10;
+        arr[1] = 33;
+        arr[2] = 22;
+        console.log(arr); //arr中有了元素
+        //读取数组中的元素
+        console.log(arr[0]);
+        //获取数组长度
+        console.log(arr.length);
+        
+        var arr1 = new Array();
+        arr1[0] = 0;
+        arr1[10] = 10;
+        console.log(arr1.length);  //长度为11
+        
+        //修改数组的长度
+        arr1.length = 4;
+        //向数组的结尾添加元素
+        arr1[arr1.length] = 50;
+        
+        //使用字面量来创建数组
+        var arr2 = [1,2,3,4];
+        console.log(arr2);
+        
+        //可以使用构造函数创建数组同时添加元素
+        var arr3 = new Array(10,20,30);
+        console.log(arr3);
+        
+        /*
+       构造函数和字面量创建方式的不同
+         */
+        //创建一个数组，数组中只有一个元素10
+        var arr4 = [10];
+        // 创建一个长度为10的数组
+        var arr5 = new Array(10);
+        
+        //数组可以放任何数据类型,也可以是对象
+        var arr6 = ["hello", 1, true, null, undefined];
+        var obj = {name:"孙悟空"};
+        arr6[arr6.length] = obj;
+        var arr7 =[{name:"孙悟空"},{name:"猪八戒"},{name:"沙和尚"}]; //数组中放了三个对象
+        //数组中还可以放函数
+        var arr8 = [function(){alert(1);},function(){alert(2);},function(){alert(3);}];
+        //调用数组中的函数
+        arr8[0]();
+        //数组中也可以放数组，数组中的数组也可以放数组
+        var arr9 = [[1,2,3],[4,5,6],[7,8,9]]; //二维数组
+        
+        /*
+        数组相关方法
+        1. push():添加元素并将数组的新长度返回
+        2. pop():删除并返回数组的最后一个元素
+        3. unshift()：向数组的开头添加一个或多个元素并返回新的数组长度
+        4. shift()：删除并返回数组的第一个元素
+        5. slice(): 从某个已有的数组返回选定的元素
+        6. splice(): 删除数组中的指定元素
+         */
+        var arr10 = ["孙悟空","猪八戒","沙和尚"];
+        //push可以添加一个或多个元素
+        arr10.push("唐僧");
+        var result = arr10.push("蜘蛛精","白骨精");
+        console.log("result = " + result); //6
+        arr10.pop();
+        console.log(arr10);
+        var result1 = arr10.pop();
+        console.log("result1 = " + result1);  //将删除的元素返回
+        console.log(arr10);
+        arr10.unshift("牛魔王");
+        console.log(arr10);  //牛魔王被添加到最前头
+        arr10.shift();
+        console.log(arr10); //第一个元素牛魔王被删除了
+        var result2 = arr10.shift();
+        console.log("result2 = " + result2);  //将孙悟空删除并返回
+        
+        var arr12 = ["孙悟空","猪八戒","沙和尚","唐僧","白骨精"];
+        arr12.slice(0,2);
+        console.log(arr12); //slice不会改变原数组
+        var result3 = arr12.slice(0,2);
+        console.log("result3 = "+result3);  //截取了原数组的前两个元素
+        var result4 = arr12.slice(1);  //只写一个参数，表示从这个位置截取到最后
+        console.log("result4 = " + result4);
+        var result5 = arr12.slice(1, -1);   //复数表示倒数的元素
+        console.log("result5 = " + result5);
+        
+        var arr13 = ["孙悟空","猪八戒","沙和尚","唐僧","白骨精"];
+        // 传递多个参数，第一个表示开始删除的索引位置，第二个表示删除的数量
+        //该方法会影响原数组
+        var result6 = arr13.splice(0,2);
+        console.log("arr13 = " + arr13);  //["沙和尚","唐僧","白骨精"]
+        console.log("result6 = " +result6); //["孙悟空","猪八戒"]
+        
+        var arr14 = ["孙悟空","猪八戒","沙和尚","唐僧","白骨精"];
+        //第三个及以后的参数表示要向原数组中添加的元素
+        var result7 = arr14.splice(0,1,"牛魔王","铁扇公主");
+        console.log("arr14 = " + arr14);
+        console.log("result7 = " + result7);
+        
+        /*
+        数组遍历
+         */
+        var arr11 = ["孙悟空","猪八戒","沙和尚"];
+        //for循环遍历
+        for(var i=0; i<arr11.length;i++){
+            console.log(arr11[i]);
+        }
+        //forEach
+        //像这种由我们创建，但是不由我们调用的函数称为回调函数
+        arr11.forEach(function(){
+            console.log("hello");
+        });
+        //
+        arr11.forEach(function(value,index,obj){
+            console.log("value = " + value);  //这个参数是浏览器传过来的，就是数组中的每个元素
+            console.log("index = " +index);  //当前遍历元素的索引
+            console.log("obj = " +obj);  //当前遍历的数组对象
+        });
+        
+        //去除数组中的重复元素
+        var arr15 = [1,2,3,2,1,3,4,2,5];
+        //获取数组中的每个元素
+        for(var i=0;i<arr15.length;i++){
+            //获取当前元素后的所有元素
+            for(var j=i;j<arr15.length;j++){
+                if(arr15[i]==arr15[j]){
+                    //相等证明有重复，删除后面的重复元素
+                    arr15.splice(j,1);
+                    //当删除了当前j所在的元素以后，后边的元素会自动补位
+                    //此时将不会再比较这个位置的元素了，因此删除位上的元素要再比较一次
+                    //不让这个位置自动自增
+                    j--;
+                }
+            }
+        }
+        console.log(arr15);
+    </script>
+</head>
+<body>
+
+</body>
+</html>

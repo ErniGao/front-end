@@ -110,8 +110,58 @@
         /*
         原型 prototype
         我们所创建的每个函数，解析器都会想函数中添加一个属性prototype
+        如果函数作为普通函数调用，prototype没有任何作用；
+        如果函数以构造函数形式调用时 （使用new），它所创建的对象中都会有一个隐含的属性，指向该构造函数的原型对象
+        要通过__proto__方式访问
          */
-
+        function MyClass(){
+            
+        }
+        //向MyClass的原型对象中添加属性a
+        MyClass.prototype.a = 123;
+        MyClass.prototype.sayHello = function(){
+            alert("say hello");
+        };
+        
+        var mc = new MyClass();
+        var mc2 = new MyClass();
+        console.log(mc.__proto__);  //也是一个对象，并且这个对象和MyCLass指向的是同一个对象
+        cosole.log(mc.__proto__== MyClass.prototype); //true
+        console.log(mc.a); //123, 因为mc中没有属性a，会去原型对象中找属性a，如果mc中有a属性，则会直接用mc中的属性a
+        mc2.a = "我是mc2中的属性";
+        console.log(mc2.a); //mc2中有a属性，会使用mc2中的属性，不会去原型中找
+        mc.sayHello(); //可以调用到原型中的sayHello方法
+        
+        /*
+        toString()
+         */
+        
+        function Person1(name, age, gender){
+            this.name = name;
+            this.age = age;
+            this.gender = gender;
+        }
+        
+        //创建person实例
+        var person = new Person1("孙悟空", 18, "男");
+        //console.log(person);  //输出实际上是调用Object的toString方法
+        //如果我们想按照自己的要求输出，要在实例中添加自己的toString方法
+        person.toString = function(){
+            return "我是孙悟空";
+        }
+        console.log(person); //输出的就是我们更改后的toString
+        
+        //如果想统一修改类的所有对象中的toSting方法要修改原型中的toString方法
+        function Person2(name, age, gender){
+            this.name = name;
+            this.age = age;
+            this.gender = gender;
+        }
+        
+        //修改原型中的toString方法
+        Person2.prototype.toString = function(){
+	            return "Person[name= " + this.name + ", age = " + this.age + "gender = " + this.gender + "] ";
+        };
     </script>
 </head>
 <body>
