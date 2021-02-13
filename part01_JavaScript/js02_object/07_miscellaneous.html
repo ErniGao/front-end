@@ -4,6 +4,115 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <script type="text/javascript">
+        //call 和 apply
+        function func(){
+	        alert("我是func函数");
+        }
+        //前两个和第三个效果是一样的
+        func.apply();
+        func.call();
+        func();
+
+        // 在调用call()和apply()时可以将一个对象指定为第一个参数, 此时这个对象将会成为函数执行时的this
+        // call 和 apply 可以用来修改函数执行时的上下文对象
+        function func1(){
+	        alert(this.name);
+        }
+
+        var obj = {name:"obj"};
+        var obj2 = {name:"obj2"};
+        func1.apply(obj);
+        func1.apply(obj2);
+
+        //call和apply的区别
+        function func2(a,b){
+            console.log("a = " + a);
+            console.log("b = " + b);
+        }
+
+        func2.call(obj);  //obj是this，a和b没传参数都是undefined
+        func2.call(obj,2, 3);  //a=2, b=3
+        func2.apply(obj,2,3); //报错： arguments list has wrong type
+        func2.apply(obj,[2,3]);
+
+        //arguments
+        function func3(){
+            console.log(arguments);
+            console.log(arguments instanceof Array); //false, arugments是类数组对象，但是不是数组
+            consle.log(arguments.length);
+        }
+        //arguments是用来封装实参的，传递进两个实参，arguments的长度就会是二，与是否有相对应的形参无关
+        func3("hello", true); //在函数调用时会传递一个arguments的参数
+
+        // Date对象
+        //创建Date对象
+        var d = new Date();   //直接使用构造函数创建一个Date对象，则会封装为当前代码执行的时间
+        var d2 = new Date("12/03/2016"); //创建一个指定的时间对象，需要在构造函数中传递一个表示时间的字符串作为参数
+        //获取日
+        var date = d.getDate();
+        //获取月
+        var month = d.getMonth();
+        //获取年
+        var year = d.getFullYear();
+        //获取星期几
+        var day = d.getDay();
+
+        /*
+        Math对象
+        1. 工具类，不需要创建对象，没有构造函数
+         */
+        //计算绝对值
+        console.log(Math.abs(-1));
+        //向上取整，小数位只要有值就进1
+        console.log(Math.ceil(1.4));
+        //向下取整，小数部分会自动舍掉 （只能针对全部是数值的运算）
+        console.log(Math.floor(1.99));
+        //四舍五入
+        console.log(Math.round(1.4));
+        //生成0-1之间的随机数 (没有0和1）
+        console.log(Math.random());
+        /*
+        生成x-y之间的随机数，就乘以（y-x）取整之后再加上x
+         */
+        //生成0-10之间的随机数
+        console.log(Math.round(Math.random()*10));
+        // max()可以获取多个数中的最大值
+        console.log(Math.max(10,30,45,100));
+        //min()获取多个数中的最小值
+        console.log(Math.min(10,30,45,100));
+        //x的y次幂
+        console.log(Math.pow(12,3));
+        console.log(Math.sqrt(4));
+
+        /*
+        包装类：
+        通过这三个包装类可以将基本数据类型转换成为对象
+         */
+        var num = new Number(3);
+        var str = new String("hello");
+        var bool = new Boolean(true);
+        console.log(typeof num); //object
+        console.log(typeof str);
+        console.log(typeof bool);
+        var num2 = new Number(3);
+        console.log(num==num2); //false，因为两个对象比较的是地址值
+
+        /*
+        String类的方法
+         */
+        var str1 = "Hello Atguigu";
+        var result = str1.charAt(0);
+        console.log("result = " + result);
+        //使用charAt和直接使用索引效果是一样的
+        var result1 = str1[0];
+        console.log("result1 = " + result1);
+        var result2 = str.charCodeAt(0);
+        console.log("result2 = " + result2);
+        //String.fromCharCode():根据字符编码来获取字符
+        var result3 = String.fromCharCode(72);
+        console.log("result3 = " + result3);
+
+
 
     </script>
 </head>
