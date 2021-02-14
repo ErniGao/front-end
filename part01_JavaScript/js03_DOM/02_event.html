@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript">
+        /*
+        onload事件可以确保函数在整个页面加载完成之后再执行
+         */
+        window.onload = function() {
+            var btn = document.getElementById("btn2");
+            btn.onclick = function(){
+            alert("你还点");
+        };
+
+        };
+    </script>
+</head>
+<body>
+    <!--
+    我们可以在事件对应的属性中设置一些js代码，这样当事件被出发时，
+    这些代码就会执行
+    -->
+    <!--单击-->
+    <button id="btn" onclick="alert('讨厌你点我干嘛');">我是一个按钮</button>
+     <!--双击-->
+    <button id="btn2" ondblclick="alert('讨厌你点我干嘛');">我是一个按钮2</button>
+    <!--鼠标移动到按钮周围-->
+    <button id="btn3" onmousemove="alert('讨厌你点我干嘛');">我是一个按钮3</button>
+    <button id="btn4">我是一个按钮4</button>
+    <script type = "text/javascript">
+        /*
+        事件就是用户和浏览器之间的交互行为
+        比如，点击按钮，鼠标移动，关闭窗口。。。
+         */
+        var btn = document.getElementById("btn4");
+        //绑定一个单击事件，事件触发的时候才执行
+        btn.onclick = function(){
+            alert("你还点");
+        };
+        btn.ondblclick = function(){
+            alert("双击事件");
+        }
+    </script>
+
+</body>
+</html>

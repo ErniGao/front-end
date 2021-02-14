@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <button id="btn">我是一个按钮</button>
+    <script type="text/javascript">
+        /*
+        浏览器已经为我们提供来文档节点对象，这个对象是window的属性
+        可以在页面中直接使用，文档节点代表的是整个网页
+         */
+        //document代表的是整个网页
+        console.log(document);
+        //获取button对象: 通过id获取元素
+        var btn = document.getElementById("btn");
+        console.log(btn);
+        //修改按钮的文字 (改html的内部代码）
+        console.log(btn.innerHTML);
+        btn.innerHTML = "I'm a button";
+    </script>
+</body>
+</html>
