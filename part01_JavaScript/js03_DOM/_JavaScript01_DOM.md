@@ -62,7 +62,6 @@
   }
   ```
 
-  
 
 ## dom查询
 
@@ -118,12 +117,22 @@
   
   - **通过具体的元素节点调用**：
     1. getElementsByTagName(): 返回当前节点的指定标签名后代节点
+    
     2. childNodes (这个是属性)：表示当前节点的所有子节点
        - 会获取包括文本节点在内的所有节点，根据DOM标签标签间空白也会当成文本节点，但是在IE8及以下的浏览器中，不会将空白文本当成子节点
        - 元素还有一个children属性（元素.children) 可以获取当前元素的所有子元素，这样获取到的全部是元素，不会获取到空白文本
+       
     3. firstChild (这个是属性)：表示当前节点的第一个字节点（包括空白文本节点）
+       
        - firstElementChild获取当前元素的第一个子元素 （不建议使用，因为对于ie浏览器只支持9以上的）
+       
     4. lastChild(这个是属性)：表示当前节点的最后一个子节点
+    
+    5. children：表示获取父节点向下的所有子元素
+    
+       ```javascript
+       var td = tr.children;
+       ```
   
 - 获取元素父节点和兄弟节点
   - 通过具体的节点调用
@@ -149,4 +158,208 @@
        }
        ```
 
+
+## DOM增删改
+
+- appendChild(): 把新的子节点添加到指定节点
+
+  - 向一个父节点中添加一个新的子节点
+
+  - 用法：父节点.appendChild(子节点);
+
+    ```javascript
+    li.appendChild(gzText);
+    ```
+
+- removeChild()：删除子节点
+
+  - 可以删除一个子节点
+
+  - 语法：
+
+    1. 父节点.removeChild(子节点); (需要先找到父节点才能删除子节点)
+
+       ```
+       city.removeChild(bj);
+       ```
+
+    2. 子节点.parentNode.removeChild(子节点); (通过子节点直接获取父元素来删除子节点，这种方式不需要获取父节点，可以直接删除)
+
+       ```
+       bj.parentNode.removeChild(bj);
+       ```
+
+- replaceChild()：替换子节点
+
+  - 可以使用指定的子节点替换已有的子节点
+
+  - 语法：父节点.replaceChild(新节点,旧节点);   (这个方法是父节点调用的)
+
+    ```
+    city.replaceChild(li , bj);
+    ```
+
+- insertBefore(): 在指定的子节点前插入新的子节点
+
+  - 以在指定的子节点前插入新的子节点
+
+  - 语法：父节点.insertBefore(新节点,旧节点); (这个方法是父节点调用的)
+
+    ```javascript
+    //创建一个广州
+    var li = document.createElement("li");
+    var gzText = document.createTextNode("广州");
+    li.appendChild(gzText);
+    
+    //获取id为bj的节点
+    var bj = document.getElementById("bj");
+    
+    //获取city
+    var city = document.getElementById("city");
+    city.insertBefore(li,bj);
+    ```
+
+- createElement(): 创建元素节点 （html的标签）
+
+  - 可以用于创建一个元素节点对象
+
+  - 它需要一个标签名作为参数，将会根据该标签名创建元素节点对象， 并将创建好的对象作为返回值返回
+
+    ```javascript
+    //document的方法，必须使用document来调用
+    var li = document.createElement("li");
+    ```
+
+- createTextNode()：创建文本节点 （标签在网页中显示的文字内容）
+
+  - 可以用来创建一个文本节点对象
+
+  - 需要一个文本内容作为参数，将会根据该内容创建文本节点，并将新的节点返回
+
+    ```javascript
+    var gzText = document.createTextNode("广州");
+    ```
+
+- innerHTML： 获取标签内的**html代码**，获取到的是标签内的所有代码
+
+  - 通过innerHTML修改的代码会直接在网页上生效，但是这种方式相当于将ul下面的所有li全部都删除再跟着新的li重新添加一遍，如果ul下的其他li已经绑定了事件就不能使用这种方式
+
+    ```
+    //向ul中添加一个li，使用字符串连接的方式
+    city.innerHTML += "<li>广州</li>";
+    ```
+
+  - 通产会使用innerHTML和dom方法调用相结合的方式
+
+    ```
+    //创建一个li
+    var li = document.createElement("li");
+    //向li中设置文本
+    li.innerHTML = "广州";
+    //将li添加到city中
+    city.appendChild(li);
+    ```
+
+## DOM 超链接
+
+- 点击超链接以后，超链接会跳转页面，这是超链接的默认行为，如果不希望出现默认行为需要取消默认行为，要通过在响应函数的最后return false来取消默认行为。也可以在超链接的标签上写href = "javascript:;"
+  - 如果a标签不添加href属性，不会显示出超链接的样子
+- 响应函数中的this就是绑定事件的元素，因此如果给超链接绑定响应函数了，点击哪个超链接this就是谁
+
+## window对象的其他方法
+
+- confirm(): 显示带有一段消息以及确认按钮和取消按钮的对话框
+
+  - 需要一个字符串作为参数，该字符串将会作为提示文字显示出来
+
+  - 如果用户点击确认则会返回true，如果点击取消则返回false
+
+    ```javascript
+    var flag = confirm("确认删除"+name+"吗?");
+    ```
+
+- 注：
+
+  1. 在向表格中新添加一行数据的时候，尽量往tbody里面添加，不要直接往table标签下添加。因为在设置样式的时候，如果使用tbody设置的样式，添加在table标签下的数据就无法应用使用tbody设置的样式
+
+## DOM操作CSS
+
+- 通过JS修改元素样式：
+
+  - 语法：元素.style.样式名 = 样式值
+
+  - 样式值需要是字符串
+
+    ```javascript
+    box1.style.width = "300px";
+    box1.style.backgroundColor = "yellow";
+    ```
+
+  - 如果CSS的样式名中含有-，这种名称在JS中是不合法的比如background-color （因为-在JS中会认为是做减法），需要将这种样式名修改为驼峰命名法，去掉-，然后将-后的字母大写
+
+  - 我们通过style属性设置的样式都是内联样式，而内联样式有较高的优先级，所以通过JS修改的样式往往会立即显示
+
+  - 如果在样式中写了!important，则此时样式会有最高的优先级，即使通过JS也不能覆盖该样式，此时将会导致JS修改样式失效，所以尽量不要为样式添加!important
+
+- 获取元素的内联样式
+
+  1. 通过style属性设置和读取内联样式, 这种方式无法读取样式表中的样式
+
+     - 语法：元素.style.样式名
+
+       ```
+       box1.style.width
+       ```
+
+  2. 获取元素的当前显示的样式
+
+     - 语法：元素.currentStyle.样式名
+
+     - 它可以用来读取当前元素**正在显示**的样式，如果当前元素没有设置该样式，则获取它的默认值
+
+     - currentStyle只有IE浏览器支持，其他的浏览器都不支持。在其他浏览器中可以使用getComputedStyle()这个方法来获取元素当前的样式，这个方法是window的方法，可以直接使用
+
+       - 需要两个参数，第一个：要获取样式的元素，第二个：可以传递一个伪元素，一般都传null
+
+       - 该方法会返回一个对象，对象中封装了当前元素对应的样式。 可以通过对象.样式名来读取样式。如果获取的样式没有设置，则会获取到真实的值，而不是默认值，比如：没有设置width，它不会获取到auto，而是一个长度
+
+         ```
+         getComputedStyle(box1,null).width)
+         ```
+
+       - 该方法不支持IE8及以下的浏览器
+
+       - 通过currentStyle和getComputedStyle()读取到的样式都是只读的，不能修改，如果要修改必须通过style属性
+
+     - 为了兼容正常浏览器和ie8， 可以自己定义一个兼容两种样式的方法
+
+       ```javascript
+       /*
+       * 定义一个函数，用来获取指定元素的当前的样式
+       * 参数：
+       * 		obj 要获取样式的元素
+       * 		name 要获取的样式名
+       */
+       
+       function getStyle(obj , name){
+       
+       	if(window.getComputedStyle){
+       		//正常浏览器的方式，具有getComputedStyle()方法
+               //判断条件中必须使用window，没有window是一个变量需要去作用域中寻找，加上window是window的一个属性，变量没找到会报错，而属性没找到返回undefined
+               //getComputedStyle()这个方法返回的是对象，样式是这个对象的属性
+       		return getComputedStyle(obj , null)[name];
+       	}else{
+       		//IE8的方式，没有getComputedStyle()方法
+       		return obj.currentStyle[name];
+       	}
+       
+           //直接使用三元表达式获取样式，如果有getComputedStyle就使用这个方法，如果没有就换currentStyle方法
+       	//return window.getComputedStyle?getComputedStyle(obj , null)[name]:obj.currentStyle[name];
+       
+       }
+       ```
+
+- element.clientHeight: 返回元素可见高度， element.clientWidth: 返回元素可见宽度
+  - 这两个属性可以获取元素的可见宽度和高度
+  - 这些属性都是不带px的，返回都是一个数字，可以直接进行计算
 - 
