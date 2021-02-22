@@ -167,6 +167,56 @@
        1. 当鼠标在被拖拽元素上按下时，开始拖拽  onmousedown，将事件绑定给要拖拽的元素
        2. 当鼠标移动时被拖拽元素跟随鼠标移动 onmousemove，将事件绑定给document，如果绑定给被拖拽的元素，元素离开了位置事件就执行不了了。这个事件必须在onmousedown的响应函数里边绑定，不然鼠标移动元素就直接跟着移动了
        3. 当鼠标松开时，被拖拽元素固定在当前位置 onmouseup，将事件绑定给document,这样无论鼠标在哪里松开，上面是否还覆盖了其他元素都可以取消鼠标移动的事件，该事件用来取消document.onmousemove (document.onmousemove = null)。并且松开鼠标的事件只是拖拽事件的一部分，之后再发送松开鼠标的时候不希望还会触发这个事件，因此要将松开鼠标的事件设置为一次性的事件，document.onmouseup = null
+     - 当我们拖拽一个网页中的内容时，浏览器会默认去搜索引擎中搜索内容，此时会导致拖拽功能的异常，这个是**浏览器提供的默认行为**，如果不希望发生这个行为，则可以通过return false来取消默认行为，但是这招对IE8不起作用
+       - setCapture()是ie8中的一个方法，当调用一个元素的setCapture()方法以后，这个元素将会把下一次所有的鼠标按下相关的事件捕获到自身上 （点其他元素就像点这个设置完setCapture的元素一样，就会触发这个设置了的元素的点击事件）
+     
+  4. 滚轮事件
+  
+     - onmousewheel鼠标滚轮滚动的事件，会在滚轮滚动时触发
+  
+     - 火狐不支持该属性，在火狐中需要使用 DOMMouseScroll 来绑定滚动事件，该事件需要通过addEventListener()函数来绑定
+  
+     - event.wheelDelta 可以获取鼠标滚轮滚动的方向，向上滚 120 ，向下滚 -120，wheelDelta这个值我们不看大小，只看正负
+  
+       - wheelDelta这个属性火狐中不支持
+       - 在火狐中使用event.detail来获取滚动的方向，向上滚 -3 ，向下滚 3，仍旧是看正负不关心大小
+  
+     - 当滚轮滚动时，如果浏览器有滚动条，滚动条会随之滚动，这是浏览器的默认行为，如果不希望发生，则可以取消默认行为，使用return false
+  
+     - 使用addEventListener()方法绑定响应函数，取消默认行为时不能使用return false，需要使用event来取消默认行为event.preventDefault(); 但是IE8不支持event.preventDefault();这个玩意，如果直接调用会报错，因此在调用这个方法之前需要先判断一下是否有preventDefault属性
+  
+       ```javascript
+       event.preventDefault && event.preventDefault();
+       ```
+  
+  5. 键盘事件
+  
+     - onkeydown： 按键被按下
+  
+       - 对于onkeydown来说如果一直按着某个按键不松手，则事件会一直触发，当onkeydown连续触发时，第一次和第二次之间会间隔稍微长一点，其他的会非常的快，这种设计是为了防止误操作的发生
+  
+     - onkeyup：按键被松开
+  
+       - onkeyup不会连续触发，松开一次就触发一次
+  
+     - 键盘事件一般都会绑定给一些**可以获取到焦点的对象**或者是document，键盘事件一般不会绑给div，因为无法选中div
+  
+       - 键盘事件的event对象具有的属性
+  
+         - 可以通过keyCode来获取按键的编码，通过它可以判断哪个按键被按下
+  
+           - KeyCode 中37，38，39，40 表示向左键，向上键，向右键，向下键
+  
+         - altKey，ctrlKey，shiftKey，这个三个用来判断alt ctrl 和 shift是否被按下，如果按下则返回true，否则返回false
+  
+           ```
+           //判断y和ctrl是否同时被按下
+           if(event.keyCode === 89 && event.ctrlKey){
+           	console.log("ctrl和y都被按下了");
+           }
+           ```
+  
+     - 在文本框中输入内容，属于onkeydown的默认行为, 如果在onkeydown中取消了默认行为，则输入的内容，不会出现在文本框中
 
 ## 文档的加载
 

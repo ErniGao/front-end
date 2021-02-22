@@ -9,6 +9,7 @@
 				width: 100px;
 				height: 100px;
 				background-color: red;
+                <!-- 需要拖拽必须开启绝对定位 -->
 				position: absolute;
 			}
 			
@@ -37,20 +38,46 @@
 				
 				//获取box1
 				var box1 = document.getElementById("box1");
-				//为box1绑定一个鼠标按下事件
+				var box2 = document.getElementById("box2");
+				var img1 = document.getElementById("img1");
+				
+				//开启box1的拖拽
+				drag(box1);
+				//开启box2的
+				drag(box2);
+				
+				drag(img1);
+				
+				
+				
+				
+			};
+			
+			/*
+			 * 提取一个专门用来设置拖拽的函数
+			 * 参数：开启拖拽的元素
+			 */
+			function drag(obj){
 				//当鼠标在被拖拽元素上按下时，开始拖拽  onmousedown
-				box1.onmousedown = function(event){
-					event = event || window.event;
+				obj.onmousedown = function(event){
 					
-					//设置偏移量为了让鼠标指针和div的相对位置保持不变
-                    //鼠标是用户控制的，我们不能改变鼠标的位置，因此只能调整元素的位置，实际要做的就是修改元素的top值和left值
-                    //clientX和clinetY是鼠标所在的位置的水平和垂直变量
-                    //offsetLeft是元素最左边距离网页左边边界的位置 
-					//div相对于鼠标的偏移量 鼠标.clentX - 元素.offsetLeft
-					//div相对于鼠标的偏移量 鼠标.clentY - 元素.offsetTop
-					//在鼠标点击时候就要求这个偏移量，这个偏移量从点击到拖拽的过程中都是保持不变的
-					var ol = event.clientX - box1.offsetLeft;
-					var ot = event.clientY - box1.offsetTop;
+					//设置box1捕获所有鼠标按下的事件
+					/*
+					 * setCapture()
+					 * 	- 只有IE支持，但是在火狐中调用时不会报错，
+					 * 		而如果使用chrome调用，会报错
+					 */
+					/*if(box1.setCapture){
+						box1.setCapture();
+					}*/
+					obj.setCapture && obj.setCapture();
+					
+					
+					event = event || window.event;
+					//div的偏移量 鼠标.clentX - 元素.offsetLeft
+					//div的偏移量 鼠标.clentY - 元素.offsetTop
+					var ol = event.clientX - obj.offsetLeft;
+					var ot = event.clientY - obj.offsetTop;
 					
 					
 					//为document绑定一个onmousemove事件
@@ -62,8 +89,8 @@
 						var top = event.clientY - ot;
 						
 						//修改box1的位置
-						box1.style.left = left+"px";
-						box1.style.top = top+"px";
+						obj.style.left = left+"px";
+						obj.style.top = top+"px";
 						
 					};
 					
@@ -74,7 +101,10 @@
 						document.onmousemove = null;
 						//取消document的onmouseup事件
 						document.onmouseup = null;
+						//当鼠标松开时，取消对事件的捕获
+						obj.releaseCapture && obj.releaseCapture();
 					};
+					
 					/*
 					 * 当我们拖拽一个网页中的内容时，浏览器会默认去搜索引擎中搜索内容，
 					 * 	此时会导致拖拽功能的异常，这个是浏览器提供的默认行为，
@@ -83,19 +113,21 @@
 					 * 但是这招对IE8不起作用
 					 */
 					return false;
+					
 				};
-				
-				
-				
-				
-			};
+			}
 			
 			
 		</script>
 	</head>
 	<body>
-		<div id="box1"></div>
+		
+		我是一段文字
+		
+		<div id="box1" style="position: absolute;"></div>
 		
 		<div id="box2"></div>
+		
+		<img src="img/an.jpg" id="img1" style="position: absolute;"/>
 	</body>
 </html>
